@@ -1,0 +1,331 @@
+
+/*nuevo comentario*/
+
+/* ============================================================
+     1) RESET BASICO
+     Sacamos los margenes que el navegador pone por defecto.
+     ============================================================ */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   /* el padding NO agranda la caja */
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    color: #222;
+    background: #FAFAFA;
+  }
+
+  /* Clase reutilizable: centra el contenido y le pone un ancho maximo */
+  .contenedor {
+    max-width: 1100px;
+    margin: 0 auto;          /* 0 arriba/abajo, auto a los costados = centrado */
+    padding: 0 20px;
+  }
+
+  /* ============================================================
+     2) HEADER
+     display:flex + justify-content:space-between
+     => logo a la izquierda, menu a la derecha.
+     ============================================================ */
+  header {
+    background: #2F8F83;
+    color: white;
+    padding: 15px 0;
+  }
+
+  .barra-nav {
+    display: flex;
+    justify-content: space-between;  /* separa logo y menu a los extremos */
+    align-items: center;             /* los alinea a la misma altura */
+    flex-wrap: wrap;                 /* en pantallas chicas bajan de linea */
+    gap: 15px;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .logo span {
+    color: #FFD34D;          /* pintamos solo una parte del nombre */
+  }
+
+  /* El menu tambien es flex: los <li> quedan en fila */
+  .menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;        /* saca los puntitos de la lista */
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .menu a:hover {
+    color: #FFD34D;
+  }
+
+  /* ============================================================
+     3) HERO (banner de bienvenida)
+     ============================================================ */
+  .hero {
+    background: #1F6F66;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .boton {
+    display: inline-block;
+    margin-top: 20px;
+    background: #FFD34D;
+    color: #222;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .boton:hover {
+    background: #FFC107;
+  }
+
+  /* ============================================================
+     4) MAIN + GRILLA DE PRODUCTOS
+     Este es el flexbox mas importante del ejercicio:
+     flex-wrap: wrap  => las cards bajan de linea solas.
+     ============================================================ */
+  main {
+    padding-bottom: 50px;
+  }
+
+  .titulo-seccion {
+    text-align: center;
+    margin: 50px 0 30px;
+    font-size: 28px;
+  }
+
+  .grilla-productos {
+    display: flex;
+    flex-wrap: wrap;          /* si no entran, pasan a la fila de abajo */
+    gap: 25px;                /* separacion entre cards */
+    justify-content: center;
+  }
+
+  /* flex: crecer | achicarse | ancho base
+     Con 320px de base entran 3 por fila en pantalla grande,
+     2 en tablet y 1 en celular. */
+  .card {
+    flex: 0 1 320px;
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    overflow: hidden;         /* recorta la imagen a las esquinas redondeadas */
+    display: flex;
+    flex-direction: column;   /* imagen arriba, texto abajo (en columna) */
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;        /* la imagen se recorta sin deformarse */
+    display: block;
+  }
+
+  .card-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;                  /* ocupa el espacio sobrante: cards parejas */
+  }
+
+  .categoria {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #2F8F83;
+    letter-spacing: 1px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .precio {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1F6F66;
+    margin-top: auto;         /* empuja el precio al fondo de la card */
+  }
+
+  .card button {
+    background: #2F8F83;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .card button:hover {
+    background: #1F6F66;
+  }
+
+  /* ============================================================
+     5) FOOTER
+     Otra vez flex: tres columnas que se acomodan solas.
+     ============================================================ */
+  footer {
+    background: #222;
+    color: #DDD;
+    padding: 40px 0 20px;
+  }
+
+  .footer-columnas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .columna {
+    flex: 1 1 250px;          /* crece, se achica, base 250px */
+  }
+
+  .columna h4 {
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .columna ul {
+    list-style: none;
+  }
+
+  .columna a {
+    color: #DDD;
+    text-decoration: none;
+  }
+
+  .columna a:hover {
+    color: #FFD34D;
+  }
+
+  /* Los iconos de redes, en fila y separados */
+  .redes {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  /* Cada icono va dentro de un circulo.
+     Usamos flex para centrarlo adentro. */
+  .redes a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+  }
+
+  .redes a:hover {
+    background: #2F8F83;
+    color: white;
+  }
+
+  .copyright {
+    text-align: center;
+    border-top: 1px solid #444;
+    margin-top: 30px;
+    padding-top: 15px;
+    font-size: 14px;
+  }
+
+  /* ============================================================
+     6) SECCION DE CONTACTO
+     Otro flex: datos a un lado y el mapa al otro.
+     Con flex-wrap, en celular el mapa baja abajo de los datos.
+     ============================================================ */
+  .bloque-contacto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    align-items: stretch;
+  }
+
+  .datos-contacto {
+    flex: 1 1 320px;          /* crece, se achica, base 320px */
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 25px;
+  }
+
+  .datos-contacto h3 {
+    font-size: 18px;
+    color: #1F6F66;
+    margin-bottom: 10px;
+  }
+
+  .datos-contacto ul {
+    list-style: none;
+    margin-bottom: 25px;
+  }
+
+  .datos-contacto li {
+    padding: 6px 0;
+  }
+
+  /* Los iconos quedan todos alineados a la misma distancia */
+  .datos-contacto li i {
+    color: #2F8F83;
+    width: 22px;
+  }
+
+  .datos-contacto a {
+    color: #222;
+    text-decoration: none;
+  }
+
+  .datos-contacto a:hover {
+    color: #2F8F83;
+    text-decoration: underline;
+  }
+
+  .nota {
+    font-size: 13px;
+    color: #777;
+  }
+
+  /* El mapa: el iframe ocupa todo el ancho de su columna */
+  .mapa {
+    flex: 1 1 420px;
+    min-height: 340px;
+    border-radius: 8px;
+    overflow: hidden;         /* recorta el mapa a las esquinas redondeadas */
+    border: 1px solid #E0E0E0;
+  }
+
+  .mapa iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    border: 0;                /* saca el borde gris que trae el iframe */
+    display: block;
+  }
