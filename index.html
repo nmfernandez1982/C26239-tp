@@ -18,10 +18,15 @@
     <nav>
       <ul class="menu">
         <li><a href="#">Inicio</a></li>
-        <li><a href="#productos">Productos</a></li>
+        <li><a href="clientes.html">Clientes</a></li>
         <li><a href="#">Ofertas</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Carrito</a></li>
+        <li>
+          <a href="finalizar.html" class="icono-carrito">
+            <i class="fa-solid fa-cart-shopping"></i> Carrito
+            <span id="contador-carrito" class="contador">0</span>
+          </a>
+        </li>
       </ul>
     </nav>
     
@@ -38,85 +43,12 @@
     <a href="#productos" class="boton">Ver productos</a>
   </section>
 
-  <!-- Seccion con las 6 cards de productos -->
+  <!-- Seccion de productos (se arma con JavaScript) -->
   <section id="productos" class="contenedor">
     <h2 class="titulo-seccion">Nuestros productos</h2>
 
-    <div class="grilla-productos">
-
-      <!-- Card 1 -->
-      <article class="card">
-        <img src="https://placehold.co/400x300/2F8F83/FFFFFF?text=Remera" alt="Remera oversize verde">
-        <div class="card-info">
-          <span class="categoria">Remeras</span>
-          <h3>Remera Oversize Hola Mundo</h3>
-          <p>100% algodón peinado. Talles S al XXL.</p>
-          <span class="precio">$18.900</span>
-          <button><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
-        </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="card">
-        <img src="https://placehold.co/400x300/1F6F66/FFFFFF?text=Buzo" alt="Buzo con capucha">
-        <div class="card-info">
-          <span class="categoria">Buzos</span>
-          <h3>Buzo Canguro Dev Mode</h3>
-          <p>Frisa invisible, bolsillo canguro y cordón ajustable.</p>
-          <span class="precio">$42.500</span>
-          <button><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="card">
-        <img src="https://placehold.co/400x300/44618C/FFFFFF?text=Jean" alt="Jean recto azul">
-        <div class="card-info">
-          <span class="categoria">Pantalones</span>
-          <h3>Jean Recto Clásico</h3>
-          <p>Denim rígido azul, cinco bolsillos, corte recto.</p>
-          <span class="precio">$55.000</span>
-          <button><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
-        </div>
-      </article>
-
-      <!-- Card 4 -->
-      <article class="card">
-        <img src="https://placehold.co/400x300/FFD34D/222222?text=Campera" alt="Campera rompeviento amarilla">
-        <div class="card-info">
-          <span class="categoria">Camperas</span>
-          <h3>Campera Rompeviento</h3>
-          <p>Impermeable, liviana y con capucha desmontable.</p>
-          <span class="precio">$68.900</span>
-          <button><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
-        </div>
-      </article>
-
-      <!-- Card 5 -->
-      <article class="card">
-        <img src="https://placehold.co/400x300/8A6BBE/FFFFFF?text=Zapatillas" alt="Zapatillas urbanas">
-        <div class="card-info">
-          <span class="categoria">Calzado</span>
-          <h3>Zapatillas Urbanas Sneak</h3>
-          <p>Suela de goma antideslizante. Del 36 al 45.</p>
-          <span class="precio">$74.200</span>
-          <button><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
-        </div>
-      </article>
-
-      <!-- Card 6 -->
-      <article class="card">
-        <img src="https://placehold.co/400x300/C94F4F/FFFFFF?text=Gorra" alt="Gorra roja con visera">
-        <div class="card-info">
-          <span class="categoria">Accesorios</span>
-          <h3>Gorra Trucker 404</h3>
-          <p>Visera curva, malla trasera y cierre regulable.</p>
-          <span class="precio">$12.300</span>
-          <button><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
-        </div>
-      </article>
-
-    </div>
+    <!-- Las cards se crean con JavaScript desde el array de js/productos.js -->
+    <div id="grilla-productos" class="grilla-productos"></div>
   </section>
 
   <!-- Seccion de contacto: datos a la izquierda, mapa a la derecha -->
@@ -197,6 +129,14 @@
 
   <p class="copyright">&copy; 2026 TalentoTech Store </p>
 </footer>
+
+<!-- SweetAlert2: libreria para mostrar alertas lindas -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+
+<!-- El orden importa: primero los datos, despues las funciones -->
+<script src="js/productos.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/index.js"></script>
 
 </body>
 </html>
