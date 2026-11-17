@@ -1,55 +1,49 @@
 /* ============================================================
-   ARRAY DE PRODUCTOS
-   Cada producto es un objeto con sus datos.
-   Todos los productos juntos forman un array (una lista).
+   PRODUCTOS DESDE LA API (Fake Store API)
+   En vez de tener los productos escritos a mano, los pedimos
+   a https://fakestoreapi.com/products con fetch.
+   La API los devuelve en ingles y con otros nombres de campos,
+   asi que los "traducimos" al mismo formato que usabamos antes:
+   { id, nombre, categoria, descripcion, precio, imagen }
    ============================================================ */
-const productos = [
-  {
-    id: 1,
-    nombre: "Remera Oversize Hola Mundo",
-    categoria: "Remeras",
-    descripcion: "100% algodón peinado. Talles S al XXL.",
-    precio: 18900,
-    imagen: "https://placehold.co/400x300/2F8F83/FFFFFF?text=Remera"
-  },
-  {
-    id: 2,
-    nombre: "Buzo Canguro Dev Mode",
-    categoria: "Buzos",
-    descripcion: "Frisa invisible, bolsillo canguro y cordón ajustable.",
-    precio: 42500,
-    imagen: "https://placehold.co/400x300/1F6F66/FFFFFF?text=Buzo"
-  },
-  {
-    id: 3,
-    nombre: "Jean Recto Clásico",
-    categoria: "Pantalones",
-    descripcion: "Denim rígido azul, cinco bolsillos, corte recto.",
-    precio: 55000,
-    imagen: "https://placehold.co/400x300/44618C/FFFFFF?text=Jean"
-  },
-  {
-    id: 4,
-    nombre: "Campera Rompeviento",
-    categoria: "Camperas",
-    descripcion: "Impermeable, liviana y con capucha desmontable.",
-    precio: 68900,
-    imagen: "https://placehold.co/400x300/FFD34D/222222?text=Campera"
-  },
-  {
-    id: 5,
-    nombre: "Zapatillas Urbanas Sneak",
-    categoria: "Calzado",
-    descripcion: "Suela de goma antideslizante. Del 36 al 45.",
-    precio: 74200,
-    imagen: "https://placehold.co/400x300/8A6BBE/FFFFFF?text=Zapatillas"
-  },
-  {
-    id: 6,
-    nombre: "Gorra Trucker 404",
-    categoria: "Accesorios",
-    descripcion: "Visera curva, malla trasera y cierre regulable.",
-    precio: 12300,
-    imagen: "https://placehold.co/400x300/C94F4F/FFFFFF?text=Gorra"
-  }
-];
+
+const URL_API = "https://fakestoreapi.com/products";
+
+// Empieza vacio y se llena cuando llega la respuesta de la API.
+let productos = [];
+
+// Traduccion de las categorias que manda la API.
+const categoriasEnEspanol = {
+  "men's clothing": "Ropa de hombre",
+  "women's clothing": "Ropa de mujer",
+  "jewelery": "Joyería",
+  "electronics": "Electrónica"
+};
+
+// Convierte un producto de la API a nuestro formato.
+function adaptarProducto(productoApi) {
+  return {
+    id: productoApi.id,
+    nombre: productoApi.title,
+    categoria: categoriasEnEspanol[productoApi.category] || productoApi.category,
+    descripcion: productoApi.description,
+    precio: productoApi.price,
+    imagen: productoApi.image
+  };
+}
+
+// Pide los productos a la API y los guarda en el array "productos".
+// Devuelve una promesa: usamos .then() para saber cuando termino.
+function cargarProductos() {
+  return fetch(URL_API)
+    .then(function (respuesta) {
+      if (!respuesta.ok) {
+        throw new Error("Error " + respuesta.status);
+      }
+      return respuesta.json();   // texto -> array de objetos
+    })
+    .then(function (datos) {
+      productos = datos.map(adaptarProducto);
+      return productos;
+    });
+}

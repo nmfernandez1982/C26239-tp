@@ -16,6 +16,11 @@
     line-height: 1.5;
     color: #222;
     background: #FAFAFA;
+    /* Footer pegado abajo: el body ocupa al menos toda la pantalla
+       y el main crece para llenar el espacio que sobra */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Clase reutilizable: centra el contenido y le pone un ancho maximo */
@@ -106,6 +111,8 @@
      ============================================================ */
   main {
     padding-bottom: 50px;
+    flex: 1;                  /* empuja el footer al final de la pantalla */
+    width: 100%;              /* sin esto, main.contenedor se achica al ser hijo de un flex */
   }
 
   .titulo-seccion {
@@ -141,8 +148,26 @@
   .card img {
     width: 100%;
     height: 240px;
-    object-fit: cover;        /* la imagen se recorta sin deformarse */
+    object-fit: contain;      /* las fotos de la API tienen distintos tamaños: se ven enteras */
+    padding: 15px;
+    background: white;
     display: block;
+  }
+
+  /* Las descripciones de la API son largas: mostramos solo 3 lineas */
+  .card-info p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Mensaje de "Cargando..." o de error en la grilla */
+  .mensaje-grilla {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+    color: #555;
   }
 
   .card-info {

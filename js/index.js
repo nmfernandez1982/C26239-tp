@@ -1,6 +1,6 @@
 /* ============================================================
    PAGINA DE PRODUCTOS
-   Recorre el array de productos y arma una card por cada uno.
+   Pide los productos a la API y arma una card por cada uno.
    ============================================================ */
 
 function mostrarProductos() {
@@ -27,4 +27,25 @@ function mostrarProductos() {
   }
 }
 
-mostrarProductos();
+// Mensaje mientras esperamos la respuesta de la API
+function mostrarCargando() {
+  const grilla = document.getElementById("grilla-productos");
+  grilla.innerHTML = `<p class="mensaje-grilla"><i class="fa-solid fa-spinner fa-spin"></i> Cargando productos...</p>`;
+}
+
+// Mensaje si la API no responde
+function mostrarError() {
+  const grilla = document.getElementById("grilla-productos");
+  grilla.innerHTML = `<p class="mensaje-grilla">No pudimos cargar los productos. Probá de nuevo más tarde.</p>`;
+}
+
+mostrarCargando();
+
+cargarProductos()
+  .then(function () {
+    mostrarProductos();
+  })
+  .catch(function (error) {
+    console.error(error);
+    mostrarError();
+  });

@@ -105,9 +105,12 @@ function actualizarContador() {
   contador.textContent = contarProductos();
 }
 
-// Convierte 18900 en "$18.900"
+// Convierte 1109.5 en "$1.109,50" (la API trae precios con centavos)
 function formatearPrecio(numero) {
-  return "$" + numero.toLocaleString("es-AR");
+  return "$" + numero.toLocaleString("es-AR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 }
 
 // Apenas carga la pagina, actualizamos el contador del header.
